@@ -1,0 +1,82 @@
+[
+  {
+    "query": "I have a PDF of a clinical case from our CBL tutorial — can you turn it into an OSCE case for the simulator?",
+    "should_trigger": true
+  },
+  {
+    "query": "Here's a patient: 45yo F with 3 months of joint pain and morning stiffness. Her RF and anti-CCP are positive. Can you make this into a case?",
+    "should_trigger": true
+  },
+  {
+    "query": "can u migrate case 018 to the new structured format with the SP script and everything",
+    "should_trigger": true
+  },
+  {
+    "query": "I've got this Word doc with SP patient info from our PMGP session. Convert it to a working OSCE case file please.",
+    "should_trigger": true
+  },
+  {
+    "query": "take the raw case text in _raw_cases/_case14_raw.txt and turn it into a proper case file with sp_script, pe_findings, investigations, the works",
+    "should_trigger": true
+  },
+  {
+    "query": "I need to add a new case — 32yo M with acute RLQ pain, fever, nausea. Likely appendicitis. Can you create the full case file?",
+    "should_trigger": true
+  },
+  {
+    "query": "convert this clinical vignette into the structured VIVA format we use now. here's the info: 67M smoker, 2 weeks of hemoptysis and weight loss, CXR shows right upper lobe mass.",
+    "should_trigger": true
+  },
+  {
+    "query": "hey so my attending gave me this patient summary from morning report, i want to add it to the osce simulator. its a case of acute pancreatitis in a 42yo woman with gallstones. can you walk me through making it?",
+    "should_trigger": true
+  },
+  {
+    "query": "i want to convert all remaining 54 cases to the new format. let's start with case 006 hypertension — can you migrate it with the full sp script and structured viva?",
+    "should_trigger": true
+  },
+  {
+    "query": "read this PDF (it's in D:/clinical/case-study-sle.pdf) and create a case from it following our new template with PE findings and everything",
+    "should_trigger": true
+  },
+  {
+    "query": "how many parts should a VIVA question have in the new format?",
+    "should_trigger": false
+  },
+  {
+    "query": "what does the sp_script field look like in CaseData? show me an example",
+    "should_trigger": false
+  },
+  {
+    "query": "the VIVA examiner keeps asking questions in Chinese. how do i fix this?",
+    "should_trigger": false
+  },
+  {
+    "query": "can you review case 003 and tell me if the PE findings are clinically accurate for an ACS presentation?",
+    "should_trigger": false
+  },
+  {
+    "query": "write me a bash script that bulk renames all case-*.ts files to add a prefix",
+    "should_trigger": false
+  },
+  {
+    "query": "what's the difference between STEMI and NSTEMI?",
+    "should_trigger": false
+  },
+  {
+    "query": "the result cards aren't showing up in the VIVA phase. can you debug the VivaPhase component?",
+    "should_trigger": false
+  },
+  {
+    "query": "I want to change the color of the PE result card border from teal to green. where do i do that?",
+    "should_trigger": false
+  },
+  {
+    "query": "how do I install pypdf to extract text from a PDF? just the pip command please",
+    "should_trigger": false
+  },
+  {
+    "query": "compare case 003 and case 015 — do they both have the same number of sp_script dialogues? which one has better ICE coverage?",
+    "should_trigger": false
+  }
+]
