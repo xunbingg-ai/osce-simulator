@@ -15,6 +15,18 @@ function stripPartTag(content: string): string {
   return content.replace(/\n?\[PART: (?:pe|investigations)\]\n?/g, '').trim();
 }
 
+function renderMarkdown(text: string): string {
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^• (.+)$/gm, '<span class="block ml-2">• $1</span>')
+    .replace(/\n\n/g, '<br><br>')
+    .replace(/\n/g, '<br>');
+}
+
 export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }: VivaPhaseProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
@@ -226,7 +238,7 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
                 <div className="flex justify-start mt-2">
                   <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-teal-500 p-4">
                     <h4 className="text-sm font-bold text-teal-700 mb-2">Physical Examination Findings</h4>
-                    <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{caseData.pe_findings}</p>
+                    <div className="text-sm text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdown(caseData.pe_findings!) }} />
                   </div>
                 </div>
               )}
@@ -234,7 +246,7 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
                 <div className="flex justify-start mt-2">
                   <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-purple-500 p-4">
                     <h4 className="text-sm font-bold text-purple-700 mb-2">Investigation Results</h4>
-                    <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{caseData.investigations}</p>
+                    <div className="text-sm text-gray-700 leading-relaxed" dangerouslySetInnerHTML={{ __html: renderMarkdown(caseData.investigations!) }} />
                   </div>
                 </div>
               )}

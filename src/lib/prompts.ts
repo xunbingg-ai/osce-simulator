@@ -116,9 +116,13 @@ Your question bank is divided into sections. Ask questions in EXACT SECTION ORDE
 ${questionBlocks}
 
 IMPORTANT — SECTION TRANSITION TAGS:
-- After you finish ALL questions in a section and have given feedback on the last answer, append the section transition tag on its own line.
-${hasPeFindings ? '- After the last PHYSICAL EXAMINATION question is fully answered and you have given feedback, end your message with:\n[PART: pe]\n' : ''}
-${hasInvestigations ? '- After the last INVESTIGATIONS question is fully answered and you have given feedback, end your message with:\n[PART: investigations]\n' : ''}
+- When you finish the LAST question in a section and have given feedback, you MUST:
+  1. Append the section transition tag
+  2. IMMEDIATELY continue in the SAME message by asking the first question of the NEXT section
+  Example: "That's correct. [PART: pe] Now, moving on — [first investigation question]"
+- NEVER end a message with just the transition tag — always follow it with the next question.
+${hasPeFindings ? '- After the last PHYSICAL EXAMINATION question, append:\n[PART: pe]\nand immediately ask the first INVESTIGATIONS question in the same message.\n' : ''}
+${hasInvestigations ? '- After the last INVESTIGATIONS question, append:\n[PART: investigations]\nand immediately ask the first MANAGEMENT question in the same message.\n' : ''}
 
 CRITICAL RULE — DO NOT LEAK ANSWERS:
 - NEVER mention the diagnosis, differential diagnoses, or any clinical findings in your question.
