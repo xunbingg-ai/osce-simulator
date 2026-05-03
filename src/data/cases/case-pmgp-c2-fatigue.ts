@@ -212,7 +212,7 @@ Respiratory: Clear to auscultation bilaterally. No wheezing or added sounds.
 
 Cardiovascular: Regular rhythm, rate 104. No murmurs or gallops.
 
-Abdomen: Soft, nondistended, nontender throughout. Bowel sounds present. No palpable masses. *Patient refused rectal exam.*
+Abdomen: Soft, nondistended, nontender throughout. Bowel sounds present. No palpable masses. Patient refused rectal exam.
 
 MSK: No joint swelling.
 
@@ -223,27 +223,27 @@ Neurological: Muscle strength 5/5 bilaterally in upper and lower extremities. De
 Extremities: No clubbing, cyanosis, or edema.
 
 Key findings: Tachycardia (104 bpm), pale conjunctivae. Patient refused rectal exam.`,
-  investigations: `**Initial Work-up (Core):**
+  investigations: `Initial Work-up (Core):
 • CBC with peripheral smear and reticulocyte count — assess for anemia, RBC morphology, bone marrow response
 • Iron studies: serum iron, ferritin, TIBC, transferrin saturation — evaluate iron deficiency
 • Lipid panel — ASCVD risk assessment
 • Fasting glucose / HbA1c — screen for diabetes
 • Fecal occult blood test (FOBT) or Colonoscopy — screen for colorectal cancer (given age 55 + rectal bleeding)
 
-**Reasonable yet Debatable:**
+Reasonable yet Debatable:
 • Vitamin B12 and Folate — evaluate for macrocytic anemia / nutritional deficiency
 • ECG — assess for cardiac cause (tachycardia, ischemia)
 • Urinalysis — screen for renal disease, hematuria
 • TSH — rule out hypothyroidism
 
-**Further Work-up if Initial Does Not Reveal a Cause:**
+Further Work-up if Initial Does Not Reveal a Cause:
 • Sleep study (polysomnography) — evaluate for OSAS
 • Stress test (exercise ECG / stress echo) — evaluate for CAD
 • LFT (liver function tests) — screen for hepatic disease
 • RFT (renal function tests: urea, creatinine, electrolytes) — screen for renal disease
 • ESR — inflammatory marker
 
-*Note: Mr. Chen refused colonoscopy ("I don't have time for that, I believe it's just my hemorrhoids") but agreed to all blood tests. PHQ-2 screening is negative. He will return with lab results in the afternoon session (CBL2 — Managing New Diagnosis).*`,
+Note: Mr. Chen refused colonoscopy ("I don't have time for that, I believe it's just my hemorrhoids") but agreed to all blood tests. PHQ-2 screening is negative. He will return with lab results in the afternoon session (CBL2 — Managing New Diagnosis).`,
   marking_scheme: {
     total_marks: 20,
     categories: {
