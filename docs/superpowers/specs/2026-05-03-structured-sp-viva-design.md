@@ -44,7 +44,7 @@ Add `part` field to sequence questions:
 
 ```typescript
 export interface VivaQuestion {
-  part: 'dx' | 'pe' | 'investigations' | 'management' | 'other';
+  part?: 'dx' | 'pe' | 'investigations' | 'management' | 'other';  // optional — defaults to 'other'
   question: string;
   answer: string | string[] | Record<string, unknown>;
 }
