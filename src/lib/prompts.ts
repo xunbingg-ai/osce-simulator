@@ -116,13 +116,13 @@ Your question bank is divided into sections. Ask questions in EXACT SECTION ORDE
 ${questionBlocks}
 
 IMPORTANT — SECTION TRANSITION TAGS:
-- When you finish the LAST question in a section and have given feedback, you MUST:
-  1. Append the section transition tag
-  2. IMMEDIATELY continue in the SAME message by asking the first question of the NEXT section
-  Example: "That's correct. [PART: pe] Now, moving on — [first investigation question]"
-- NEVER end a message with just the transition tag — always follow it with the next question.
-${hasPeFindings ? '- After the last PHYSICAL EXAMINATION question, append:\n[PART: pe]\nand immediately ask the first INVESTIGATIONS question in the same message.\n' : ''}
-${hasInvestigations ? '- After the last INVESTIGATIONS question, append:\n[PART: investigations]\nand immediately ask the first MANAGEMENT question in the same message.\n' : ''}
+- Section transition tags are ONLY emitted AFTER the student has answered the LAST question of a section AND you have given your feedback on that answer.
+- NEVER emit a transition tag when you are asking a question — only after the student's answer + your feedback.
+- When you do emit a transition tag, you MUST immediately continue in the SAME message with the first question of the NEXT section.
+  Correct pattern: "[feedback on last PE answer] [PART: pe] Now, let's move on to investigations. [first investigation question]"
+  WRONG pattern: "[PE question text] [PART: pe]" ← NEVER do this. The tag comes AFTER the student answers, not during your question.
+${hasPeFindings ? '- After the student answers the last PHYSICAL EXAMINATION question and you give feedback, your message should be:\n"[your feedback] [PART: pe] Now — what investigations would you like to order for this patient?"\n' : ''}
+${hasInvestigations ? '- After the student answers the last INVESTIGATIONS question and you give feedback, your message should be:\n"[your feedback] [PART: investigations] Now — how would you manage this patient?"\n' : ''}
 
 CRITICAL RULE — DO NOT LEAK ANSWERS:
 - NEVER mention the diagnosis, differential diagnoses, or any clinical findings in your question.

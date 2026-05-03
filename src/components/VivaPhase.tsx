@@ -16,7 +16,9 @@ function stripPartTag(content: string): string {
 }
 
 function renderMarkdown(text: string): string {
-  return text
+  // Normalize Windows CRLF to LF
+  const normalized = text.replace(/\r\n/g, '\n');
+  return normalized
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
