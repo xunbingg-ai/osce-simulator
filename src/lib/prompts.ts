@@ -4,12 +4,17 @@ import { DeepSeekMessage } from './deepseek';
 
 function buildPatientSummary(caseData: CaseData): string {
   const p = caseData.patient;
-  return [
+  const lines: string[] = [
     `Age: ${p.age}`,
     `Gender: ${p.gender === 'M' ? 'Male' : 'Female'}`,
     `Occupation: ${p.occupation}`,
     `Chief complaint: ${p.chief_complaint}`,
     `Presenting scenario: ${p.presentation.setting}`,
+  ];
+  if (caseData.vital_signs) {
+    lines.push(`Vital Signs: ${caseData.vital_signs}`);
+  }
+  lines.push(
     `Pain details: ${p.presentation.hpi.onset}. ${p.presentation.hpi.site}. ${p.presentation.hpi.character}. Severity: ${p.presentation.hpi.severity}.`,
     `Past medical history: ${p.medical_history.chronic_conditions.join(', ') || 'None significant'}`,
     `Medications: ${p.drug_history.medications.join(', ') || 'None'}`,
@@ -20,16 +25,35 @@ function buildPatientSummary(caseData: CaseData): string {
     `ICE - Ideas: ${p.ice.ideas}`,
     `ICE - Concerns: ${p.ice.concerns}`,
     `ICE - Expectations: ${p.ice.expectations}`,
-  ].join('\n');
+  );
+  return lines.join('\n');
 }
 
 export function buildChatSystemPrompt(caseData: CaseData, language: Language): string {
   const summary = buildPatientSummary(caseData);
 
+  let scriptSection = '';
+  if (caseData.sp_script && caseData.sp_script.length > 0) {
+    const dialogues = caseData.sp_script
+      .map((d, i) => {
+        if (language === 'zh') {
+          return `Trigger ${i + 1}: "${d.trigger_zh}"\nScripted response: "${d.response_zh}"`;
+        }
+        return `Trigger ${i + 1}: "${d.trigger}"\nScripted response: "${d.response}"`;
+      })
+      .join('\n\n');
+    scriptSection = `
+CORE DIALOGUE SCRIPT:
+The following are specific trigger-response pairs. When the student's question matches a trigger, use the corresponding scripted response. If no trigger matches, improvise naturally from your persona knowledge base.
+
+${dialogues}`;
+  }
+
   if (language === 'zh') {
     return `你现在是一个OSCE（客观结构化临床考试）临床技能考核中的模拟病人。请严格按照以下信息来扮演这个角色。
 
 ${summary}
+${scriptSection}
 
 重要规则：
 1. 用中文自然地回答医学生的问题。使用日常用语，不要使用医学术语。
@@ -37,12 +61,14 @@ ${summary}
 3. 你有轻度不适但总体配合检查。
 4. 当被问及你的想法、担忧和期望时，请根据上述ICE部分回答。
 5. 保持角色一致。不要跳出角色进行解释或给出医学建议。
-6. 如果你不清楚的问题或学生询问的不是你应该知道的信息，可以说"我不太清楚"或"我不知道"。`;
+6. 如果你不清楚的问题或学生询问的不是你应该知道的信息，可以说"我不太清楚"或"我不知道"。
+7. 如果学生的问题与某个核心对话剧本匹配，优先使用剧本中的回答。`;
   }
 
   return `You are a simulated patient for an OSCE (Objective Structured Clinical Examination) clinical skills assessment. Stay in character based on the following information:
 
 ${summary}
+${scriptSection}
 
 Important rules:
 1. Respond naturally to the medical student's questions. Use layperson language — do NOT use medical terminology.
@@ -50,36 +76,64 @@ Important rules:
 3. You are in mild discomfort but cooperative with the examination.
 4. When asked about your ideas, concerns, and expectations, respond according to the ICE section above.
 5. Stay in character at all times. Do not break character to explain things or give medical advice.
-6. If you're unsure about something or the student asks something you wouldn't know as this patient, say "I'm not sure" or "I don't know."`;
+6. If you're unsure about something or the student asks something you wouldn't know as this patient, say "I'm not sure" or "I don't know."
+7. When the student's question matches a trigger topic in the core dialogue script, use the scripted response.`;
 }
 
 export function buildVivaSystemPrompt(caseData: CaseData): string {
-  const questionList = caseData.questions
-    .map((q, i) => `${i + 1}. ${q.question}`)
-    .join('\n');
+  const partOrder: Array<{ part: string; label: string }> = [
+    { part: 'dx', label: 'DIAGNOSIS & DIFFERENTIAL DIAGNOSIS' },
+    { part: 'pe', label: 'PHYSICAL EXAMINATION' },
+    { part: 'investigations', label: 'INVESTIGATIONS' },
+    { part: 'management', label: 'MANAGEMENT' },
+    { part: 'other', label: 'ADDITIONAL QUESTIONS' },
+  ];
+
+  const grouped: Record<string, string[]> = {};
+  for (const { part, label } of partOrder) {
+    const qs = caseData.questions
+      .filter(q => (q.part || 'other') === part)
+      .map((q, i) => `${i + 1}. ${q.question}`);
+    if (qs.length > 0) {
+      grouped[label] = qs;
+    }
+  }
+
+  const questionBlocks = Object.entries(grouped)
+    .map(([label, qs]) => `--- ${label} ---\n${qs.join('\n')}`)
+    .join('\n\n');
+
+  const hasPeFindings = !!caseData.pe_findings;
+  const hasInvestigations = !!caseData.investigations;
 
   return `You are an OSCE examiner conducting a viva voce (oral examination) for a medical student.
 
 Case: ${caseData.case_name}
 ${caseData.patient.age}-year-old ${caseData.patient.gender === 'M' ? 'male' : 'female'} presenting with ${caseData.patient.chief_complaint}.
 
-Your question bank (ask these in order, one at a time):
-${questionList}
+Your question bank is divided into sections. Ask questions in EXACT SECTION ORDER:
+
+${questionBlocks}
+
+IMPORTANT — SECTION TRANSITION TAGS:
+- After you finish ALL questions in a section and have given feedback on the last answer, append the section transition tag on its own line.
+${hasPeFindings ? '- After the last PHYSICAL EXAMINATION question is fully answered and you have given feedback, end your message with:\n[PART: pe]\n' : ''}
+${hasInvestigations ? '- After the last INVESTIGATIONS question is fully answered and you have given feedback, end your message with:\n[PART: investigations]\n' : ''}
 
 CRITICAL RULE — DO NOT LEAK ANSWERS:
 - NEVER mention the diagnosis, differential diagnoses, or any clinical findings in your question.
 - NEVER embed hints about the correct answer in how you phrase the question.
-- NEVER say things like "What is the most likely diagnosis, which is X?" or "Why is Y the correct management?"
-- Your questions must be neutral and exam-like. Ask the question exactly as written above.
-- Only AFTER the student has responded should you evaluate their answer.
+- NEVER say things like "What is the most likely diagnosis, which is X?"
+- Your questions must be neutral and exam-like.
 
 Rules:
-1. Ask ONE question at a time. Wait for the student's answer before moving on.
+1. Start from the first section. Ask ONE question at a time. Wait for the student's answer before moving on.
 2. After each student answer, give brief constructive feedback (1-2 sentences), then ask the next question.
 3. If the answer is incomplete, probe gently before moving on. Do NOT fill in the missing parts yourself until the student has had a chance to respond.
 4. If the student gives an excellent answer, acknowledge it briefly.
-5. After ALL questions have been asked and answered, say "The viva session is now complete. Thank you." and stop.
-6. Stay focused and professional. Do not go off-topic.`;
+5. Transition between sections using the section transition tags exactly as specified above.
+6. After ALL questions in ALL sections have been asked and answered, say "The viva session is now complete. Thank you." and stop.
+7. Stay focused and professional. Do not go off-topic.`;
 }
 
 export function buildAssessmentSystemPrompt(
