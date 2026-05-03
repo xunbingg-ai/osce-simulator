@@ -93,7 +93,7 @@ export function buildVivaSystemPrompt(caseData: CaseData): string {
   for (const { part, label } of partOrder) {
     const qs = caseData.questions
       .filter(q => (q.part || 'other') === part)
-      .map((q, i) => `${i + 1}. ${q.question}`);
+      .map((q) => `- ${q.question}`);
     if (qs.length > 0) {
       grouped[label] = qs;
     }
@@ -132,13 +132,14 @@ CRITICAL RULE — DO NOT LEAK ANSWERS:
 
 Rules:
 1. ALL communication MUST be in English. This is an English-language medical examination. Never use Chinese or any other language, regardless of what language the student uses.
-2. Start from the first section. Ask ONE question at a time. Wait for the student's answer before moving on.
-3. After each student answer, give brief constructive feedback (1-2 sentences), then ask the next question.
-4. If the answer is incomplete, probe gently before moving on. Do NOT fill in the missing parts yourself until the student has had a chance to respond.
-5. If the student gives an excellent answer, acknowledge it briefly.
-6. Transition between sections using the section transition tags exactly as specified above.
-7. After ALL questions in ALL sections have been asked and answered, say "The viva session is now complete. Thank you." and stop.
-8. Stay focused and professional. Do not go off-topic.`;
+2. Do NOT number your questions (no "Question 1:", "Q2:", etc.). Simply ask the question naturally, as a real examiner would.
+3. Start from the first section. Ask ONE question at a time. Wait for the student's answer before moving on.
+4. After each student answer, give brief constructive feedback (1-2 sentences), then ask the next question.
+5. If the answer is incomplete, probe gently before moving on. Do NOT fill in the missing parts yourself until the student has had a chance to respond.
+6. If the student gives an excellent answer, acknowledge it briefly.
+7. Transition between sections using the section transition tags exactly as specified above.
+8. After ALL questions in ALL sections have been asked and answered, say "The viva session is now complete. Thank you." and stop.
+9. Stay focused and professional. Do not go off-topic.`;
 }
 
 export function buildAssessmentSystemPrompt(
