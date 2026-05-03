@@ -15,6 +15,13 @@ function stripPartTag(content: string): string {
   return content.replace(/\n?\[PART: (?:pe|investigations)\]\n?/g, '').trim();
 }
 
+function tagIsAfterFeedback(content: string, tag: string): boolean {
+  const idx = content.indexOf(tag);
+  if (idx === -1) return false;
+  const beforeTag = content.substring(0, idx);
+  return !beforeTag.includes('?');
+}
+
 function renderMarkdown(text: string): string {
   // Normalize Windows CRLF to LF
   const normalized = text.replace(/\r\n/g, '\n');
@@ -236,7 +243,7 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
                   </div>
                 </div>
               </div>
-              {msg.role === 'examiner' && msg.content.includes('[PART: pe]') && caseData.pe_findings && showPeResults && (
+              {msg.role === 'examiner' && msg.content.includes('[PART: pe]') && tagIsAfterFeedback(msg.content, '[PART: pe]') && caseData.pe_findings && showPeResults && (
                 <div className="flex justify-start mt-2">
                   <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-teal-500 p-4">
                     <h4 className="text-sm font-bold text-teal-700 mb-2">Physical Examination Findings</h4>
@@ -244,7 +251,7 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
                   </div>
                 </div>
               )}
-              {msg.role === 'examiner' && msg.content.includes('[PART: investigations]') && caseData.investigations && showInvestigationResults && (
+              {msg.role === 'examiner' && msg.content.includes('[PART: investigations]') && tagIsAfterFeedback(msg.content, '[PART: investigations]') && caseData.investigations && showInvestigationResults && (
                 <div className="flex justify-start mt-2">
                   <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-purple-500 p-4">
                     <h4 className="text-sm font-bold text-purple-700 mb-2">Investigation Results</h4>
@@ -252,14 +259,14 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
                   </div>
                 </div>
               )}
-              {msg.role === 'examiner' && msg.content.includes('[PART: pe]') && !caseData.pe_findings && showPeResults && (
+              {msg.role === 'examiner' && msg.content.includes('[PART: pe]') && tagIsAfterFeedback(msg.content, '[PART: pe]') && !caseData.pe_findings && showPeResults && (
                 <div className="flex justify-start mt-2">
                   <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-teal-500 p-4">
                     <p className="text-sm text-gray-500 italic">No physical examination findings data available for this case.</p>
                   </div>
                 </div>
               )}
-              {msg.role === 'examiner' && msg.content.includes('[PART: investigations]') && !caseData.investigations && showInvestigationResults && (
+              {msg.role === 'examiner' && msg.content.includes('[PART: investigations]') && tagIsAfterFeedback(msg.content, '[PART: investigations]') && !caseData.investigations && showInvestigationResults && (
                 <div className="flex justify-start mt-2">
                   <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-purple-500 p-4">
                     <p className="text-sm text-gray-500 italic">No investigation results data available for this case.</p>
