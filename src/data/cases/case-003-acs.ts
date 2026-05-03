@@ -211,11 +211,11 @@ Extremities: Warm, well-perfused. No clubbing, cyanosis, or edema. No calf tende
 Neurological: Alert and oriented ×3. Cranial nerves grossly intact. Moving all four limbs.
 
 Key findings: Tachycardia (116 bpm), hypertension (166/102), S4 gallop, diaphoresis, bilateral equal arm BP, clear lung fields.`,
-  investigations: `**Immediate (within 10 minutes):**
+  investigations: `Immediate (within 10 minutes):
 • 12-lead ECG — ST-segment elevation ≥2mm in leads V2-V4 (anteroseptal) with reciprocal ST depression in II, III, aVF → consistent with acute anteroseptal STEMI
 • High-sensitivity Troponin I — elevated at 2.8 ng/mL (normal <0.04 ng/mL), consistent with myocardial necrosis
 
-**Within First Hour:**
+Within First Hour:
 • CBC — WBC 11.2 × 10⁹/L (mild leukocytosis — stress response), Hb 14.8 g/dL, Platelets 245 × 10⁹/L
 • Coagulation profile — PT 12.5s, aPTT 28s, INR 1.1 (baseline — before anticoagulation)
 • Renal function — Urea 5.2 mmol/L, Creatinine 88 μmol/L, eGFR >90 mL/min (normal — safe for contrast)
@@ -224,10 +224,10 @@ Key findings: Tachycardia (116 bpm), hypertension (166/102), S4 gallop, diaphore
 • Lipid panel — Total cholesterol 6.8 mmol/L, LDL 4.9 mmol/L, HDL 0.9 mmol/L, Triglycerides 2.1 mmol/L
 • Chest X-ray — Normal cardiac silhouette. No pulmonary edema. Mediastinum not widened. Clear lung fields.
 
-**Bedside Echocardiogram (if available):**
+Bedside Echocardiogram (if available):
 • Hypokinesis of anterior wall and septum. LVEF estimated 45-50%. No significant valvular abnormality. No pericardial effusion.
 
-**Diagnosis confirmed:** Acute anteroseptal ST-segment elevation myocardial infarction (STEMI). Activate cardiac catheterization lab for primary PCI.`,
+Diagnosis confirmed: Acute anteroseptal ST-segment elevation myocardial infarction (STEMI). Activate cardiac catheterization lab for primary PCI.`,
   marking_scheme: {
     total_marks: 20,
     categories: {
