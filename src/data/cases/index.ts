@@ -59,6 +59,7 @@ import case057PolycythemiaVera from './case-057-polycythemia-vera';
 import case058SickleCellCrisis from './case-058-sickle-cell-crisis';
 import case059AlcoholWithdrawal from './case-059-alcohol-withdrawal';
 import case060OpioidOverdose from './case-060-opioid-overdose';
+import casePMGPC2Fatigue from './case-pmgp-c2-fatigue';
 
 export const allCases: CaseData[] = [
   case001HealthMaint,
@@ -121,6 +122,7 @@ export const allCases: CaseData[] = [
   case058SickleCellCrisis,
   case059AlcoholWithdrawal,
   case060OpioidOverdose,
+  casePMGPC2Fatigue,
 ];
 
 export const regularCases: CaseData[] = allCases.filter(c => c.type === "regular");
