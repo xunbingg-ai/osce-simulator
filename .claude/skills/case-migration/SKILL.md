@@ -69,11 +69,13 @@ The `case_name` must use chief complaint language, NOT the diagnosis (prevents a
 - Chinese is natural spoken Chinese, not translationese
 
 ### VIVA Question Rules
-- Every question has a `part` label: `'dx' | 'pe' | 'investigations' | 'management' | 'other'`
+- **EVERY question MUST have a `part` label:** `'dx' | 'pe' | 'investigations' | 'management' | 'other'`
+- **ALL 5 categories MUST be covered** — every case must have at least 1 question for each part type. Missing any category is a build blocker.
 - Strict order: dx (1-2) → pe (1+) → investigations (1-2) → management (1-2) → other (1-2)
-- At least 1 PE question with `part: 'pe'`
+- PE question must use the format: "How would you examine this patient? What specific signs would you look for?"
 - Questions are neutral and exam-like — no diagnostic hints in question wording
-- Total 6-9 questions
+- Total 7-9 questions (5 minimum, one per category)
+- **After writing, verify:** count unique `part` values — must equal 5. If any of dx/pe/investigations/management/other is missing, add it before proceeding to Step 3.
 
 ---
 

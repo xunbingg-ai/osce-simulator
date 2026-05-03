@@ -86,21 +86,24 @@ Each dialogue must have bilingual trigger + response:
 }
 ```
 
-### Part Distribution (6-9 questions total)
+### Part Distribution (7-9 questions total)
 
-| Part | Count | Question Type |
-|---|---|---|
-| `'dx'` | 1-2 | Most likely diagnosis + reasoning; differential diagnosis differentiation |
-| `'pe'` | 1 | "How would you examine this patient? What specific signs would you look for?" |
-| `'investigations'` | 1-2 | Investigations to order + rationale; special test interpretation |
-| `'management'` | 1-2 | Acute and long-term management plan |
-| `'other'` | 1-2 | Complications, epidemiology, prognosis, prevention, guidelines |
+**ALL 5 part types are MANDATORY.** Every case MUST have at least 1 question for each part. Missing any category is a build blocker — the case is incomplete without it.
+
+| Part | Count | Required | Question Type |
+|---|---|---|---|
+| `'dx'` | 1-2 | **Mandatory** | Most likely diagnosis + reasoning; differential diagnosis differentiation |
+| `'pe'` | 1 | **Mandatory** | "How would you examine this patient? What specific signs would you look for?" |
+| `'investigations'` | 1-2 | **Mandatory** | Investigations to order + rationale; special test interpretation |
+| `'management'` | 1-2 | **Mandatory** | Acute and long-term management plan |
+| `'other'` | 1-2 | **Mandatory** | Complications, epidemiology, prognosis, prevention, guidelines |
 
 Rules:
-- ALL questions must have a `part` label
-- Questions must be in exact order: dx → pe → investigations → management → other
+- ALL questions must have a `part` label — no exceptions
+- Questions must be in strict order: dx → pe → investigations → management → other
 - PE question must start with "How would you examine this patient?"
 - Questions must NOT hint at the answer in their wording
+- **Post-writing check:** Count the unique `part` values — must be exactly 5: `{dx, pe, investigations, management, other}`
 
 ---
 
