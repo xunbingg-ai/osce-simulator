@@ -152,7 +152,7 @@ const case036TIA: CaseData = {
     {
       part: 'dx',
       question: 'What is the most likely diagnosis and why?',
-      answer: 'Transient ischemic attack (TIA), most likely caused by atheroembolism from the left internal carotid artery. The patient had acute onset of right-sided neurologic deficits (facial droop, arm weakness, speech difficulty) that fully resolved within hours, now with nearly complete resolution. He also had a prior episode of transient monocular blindness (amaurosis fugax) in the left eye, which is classic for carotid territory TIA.',
+      answer: 'Transient ischemic attack (TIA), most likely caused by atheroembolism from the left internal carotid artery. The patient had acute onset of right-sided neurologic deficits (facial droop, arm weakness, speech difficulty) that fully resolved within hours, now with nearly complete resolution. He also had a prior episode of transient monocular blindness (amaurosis fugax — transient painless loss of vision in one eye, classically described as "a curtain being pulled down," caused by retinal ischemia from cholesterol emboli originating from the ipsilateral carotid artery). This is a form of TIA in the retinal (carotid) circulation and a classic warning sign for future hemispheric stroke. Risk factors: age 72, longstanding hypertension, prior MI, hyperlipidemia. ABCD2 score = 6 (high risk).',
     },
     {
       part: 'dx',
@@ -181,8 +181,8 @@ const case036TIA: CaseData = {
     },
     {
       part: 'other',
-      question: 'What is amaurosis fugax and what does it indicate?',
-      answer: 'Amaurosis fugax is transient monocular blindness, often described as a gray shade being pulled down over one eye, caused by retinal ischemia. It is most often due to emboli (Hollenhorst plaques — cholesterol emboli) originating from the ipsilateral carotid artery. It is a form of TIA in the retinal circulation and a warning sign for future stroke.',
+      question: 'What are the complications and prognosis after a TIA? What is the risk of subsequent stroke?',
+      answer: 'TIA is a medical emergency ("warning stroke") — not a benign event. Stroke risk after TIA: ~5% at 48 hours, ~8% at 7 days, ~10-15% at 90 days (highest in first 48 hours). The ABCD2 score stratifies this risk. Half of all strokes that occur within 90 days of TIA happen in the first 48 hours — hence the urgency of evaluation. Complications: subsequent ischemic stroke (most feared — may cause permanent disability, aphasia, hemiparesis), recurrent TIA, cognitive decline (vascular dementia from cumulative ischemic injury), functional decline. Prognosis: With optimal medical management (antiplatelet, statin, BP control) and carotid intervention when indicated, the 90-day stroke risk can be reduced by ~80%. Long-term prognosis depends on: degree of carotid stenosis, control of vascular risk factors, presence of atrial fibrillation, medication adherence, and lifestyle modifications. Patients with TIA have a 10-year risk of stroke, MI, or vascular death of ~30% — aggressive secondary prevention is essential.',
     },
   ],
   pe_findings: `**Vital Signs**: T 37.0°C, P 62 bpm (regular), R 16/min, BP 135/87 mmHg (equal in both arms), SpO₂ 98% on room air

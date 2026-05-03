@@ -180,8 +180,8 @@ const case014PE: CaseData = {
     },
     {
       part: 'investigations',
-      question: 'What diagnostic tests would you order?',
-      answer: 'Initial: pulse oximetry, ABG (A-a gradient, hypocapnia), ECG (sinus tachycardia, S1Q3T3 pattern, RV strain), CXR (usually normal or nonspecific — Westermark sign, Hampton hump). Definitive: CT pulmonary angiography (CTPA) — gold standard. V/Q scan if CTPA contraindicated (renal failure, contrast allergy). D-dimer for low/moderate probability patients (negative rules out PE). Echo may show RV strain/dilation.',
+      question: 'What diagnostic tests would you order? Describe the key findings you would expect.',
+      answer: 'Initial: pulse oximetry (hypoxemia), ABG (increased A-a gradient, respiratory alkalosis with hypocapnia), ECG — sinus tachycardia most common; classic S1Q3T3 pattern (S wave in lead I, Q wave and inverted T wave in lead III) represents acute RV strain but has low sensitivity (~20%); other ECG findings include right axis deviation, RBBB, P pulmonale, T wave inversion in V1-V4 (RV strain pattern), CXR (usually normal or nonspecific — important: a normal CXR in a hypoxic dyspneic patient increases PE suspicion; may rarely show Westermark sign or Hampton hump). Definitive: CT pulmonary angiography (CTPA) — gold standard, shows intraluminal filling defects. V/Q scan if CTPA contraindicated (renal failure, contrast allergy). D-dimer: high sensitivity, low specificity; negative result rules out PE in low/moderate pre-test probability. Echo: may show RV strain/dilation, McConnell sign (RV free wall akinesis with apical sparing). Lower extremity Doppler: confirms DVT (source of embolus).',
     },
     {
       part: 'management',
@@ -190,8 +190,8 @@ const case014PE: CaseData = {
     },
     {
       part: 'other',
-      question: 'What is the S1Q3T3 pattern on ECG?',
-      answer: 'Classic but not sensitive PE finding: S wave in lead I, Q wave and inverted T wave in lead III. Represents acute right heart strain. Other ECG findings: sinus tachycardia, right axis deviation, RBBB, P pulmonale, T wave inversion in V1-V4 (RV strain pattern).',
+      question: 'What are the complications of pulmonary embolism, and what is the long-term prognosis after PE?',
+      answer: 'Acute complications: obstructive shock from RV failure (massive PE), cardiac arrest, paradoxical embolism through PFO causing stroke or systemic embolism, death (mortality ~50% for massive PE if untreated). Chronic complications: chronic thromboembolic pulmonary hypertension (CTEPH) — develops in 2-4% of PE survivors due to incomplete thrombus resolution, causing progressive dyspnea and RV failure; post-PE syndrome — chronic functional limitation, exercise intolerance, and reduced quality of life persisting months to years after the acute event. Prognosis: 30-day mortality ~10% overall, but highly dependent on severity (massive PE ~50%, submassive ~3-15%, low-risk <1%). Long-term survival determined by underlying cause and comorbidities. Patients with provoked PE and reversible risk factors have excellent prognosis after completing 3-6 months of anticoagulation. Unprovoked PE carries ~30% recurrence risk at 10 years without extended anticoagulation. All survivors should be followed for CTEPH symptoms (progressive dyspnea, fatigue) — echocardiography at 3-6 months if symptoms persist.',
     },
   ],
   pe_findings: `**Vital Signs:** T 37.1°C, P 112 bpm (regular), R 28/min, BP 128/84 mmHg, SpO₂ 89% on room air (desaturates to 85% with minimal exertion)
