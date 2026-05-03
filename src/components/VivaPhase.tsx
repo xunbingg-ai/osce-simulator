@@ -11,11 +11,17 @@ interface VivaPhaseProps {
   onComplete: (messages: ChatMessage[]) => void;
 }
 
+function stripPartTag(content: string): string {
+  return content.replace(/\n?\[PART: (?:pe|investigations)\]\n?/g, '').trim();
+}
+
 export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }: VivaPhaseProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [vivaStarted, setVivaStarted] = useState(false);
+  const [showPeResults, setShowPeResults] = useState(false);
+  const [showInvestigationResults, setShowInvestigationResults] = useState(false);
   const [phaseComplete, setPhaseComplete] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -55,6 +61,13 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
         timestamp: Date.now(),
       };
       setMessages([examinerMessage]);
+
+      if (data.reply.includes('[PART: pe]')) {
+        setShowPeResults(true);
+      }
+      if (data.reply.includes('[PART: investigations]')) {
+        setShowInvestigationResults(true);
+      }
     } catch (error) {
       console.error('VIVA start error:', error);
     } finally {
@@ -116,6 +129,13 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
 
       setMessages((prev) => [...prev, examinerMessage]);
 
+      if (data.reply.includes('[PART: pe]')) {
+        setShowPeResults(true);
+      }
+      if (data.reply.includes('[PART: investigations]')) {
+        setShowInvestigationResults(true);
+      }
+
       if (data.reply.toLowerCase().includes('viva session is now complete')) {
         setPhaseComplete(true);
       }
@@ -174,34 +194,65 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-4 flex-1 max-h-[28rem] min-h-[20rem] overflow-y-auto">
         <div className="space-y-6">
           {messages.map((msg, idx) => (
-            <div
-              key={msg.id}
-              className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
-            >
-              <div className={`flex items-start gap-2 sm:gap-3 max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
-                <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold ${
-                    msg.role === 'user'
-                      ? 'bg-gradient-to-br from-blue-500 to-blue-600'
-                      : 'bg-gradient-to-br from-purple-500 to-purple-600'
-                  }`}
-                >
-                  {msg.role === 'user' ? 'You' : 'Ex'}
-                </div>
-                <div
-                  className={`px-4 py-3 rounded-2xl ${
-                    msg.role === 'user'
-                      ? 'bg-blue-500 text-white rounded-tr-sm'
-                      : 'bg-purple-50 text-gray-800 rounded-tl-sm border border-purple-200'
-                  }`}
-                >
-                  <p className="text-sm font-semibold text-purple-600 mb-1">
-                    {msg.role === 'examiner' ? 'Examiner' : 'You'}
-                  </p>
-                  <p className="text-base leading-relaxed whitespace-pre-wrap break-words">{msg.content}</p>
+            <React.Fragment key={msg.id}>
+              <div
+                className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+              >
+                <div className={`flex items-start gap-2 sm:gap-3 max-w-[80%] ${msg.role === 'user' ? 'flex-row-reverse' : ''}`}>
+                  <div
+                    className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold ${
+                      msg.role === 'user'
+                        ? 'bg-gradient-to-br from-blue-500 to-blue-600'
+                        : 'bg-gradient-to-br from-purple-500 to-purple-600'
+                    }`}
+                  >
+                    {msg.role === 'user' ? 'You' : 'Ex'}
+                  </div>
+                  <div
+                    className={`px-4 py-3 rounded-2xl ${
+                      msg.role === 'user'
+                        ? 'bg-blue-500 text-white rounded-tr-sm'
+                        : 'bg-purple-50 text-gray-800 rounded-tl-sm border border-purple-200'
+                    }`}
+                  >
+                    <p className="text-sm font-semibold text-purple-600 mb-1">
+                      {msg.role === 'examiner' ? 'Examiner' : 'You'}
+                    </p>
+                    <p className="text-base leading-relaxed whitespace-pre-wrap break-words">{stripPartTag(msg.content)}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+              {msg.role === 'examiner' && msg.content.includes('[PART: pe]') && caseData.pe_findings && showPeResults && (
+                <div className="flex justify-start mt-2">
+                  <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-teal-500 p-4">
+                    <h4 className="text-sm font-bold text-teal-700 mb-2">Physical Examination Findings</h4>
+                    <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{caseData.pe_findings}</p>
+                  </div>
+                </div>
+              )}
+              {msg.role === 'examiner' && msg.content.includes('[PART: investigations]') && caseData.investigations && showInvestigationResults && (
+                <div className="flex justify-start mt-2">
+                  <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-purple-500 p-4">
+                    <h4 className="text-sm font-bold text-purple-700 mb-2">Investigation Results</h4>
+                    <p className="text-sm text-gray-700 whitespace-pre-wrap leading-relaxed">{caseData.investigations}</p>
+                  </div>
+                </div>
+              )}
+              {msg.role === 'examiner' && msg.content.includes('[PART: pe]') && !caseData.pe_findings && showPeResults && (
+                <div className="flex justify-start mt-2">
+                  <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-teal-500 p-4">
+                    <p className="text-sm text-gray-500 italic">No physical examination findings data available for this case.</p>
+                  </div>
+                </div>
+              )}
+              {msg.role === 'examiner' && msg.content.includes('[PART: investigations]') && !caseData.investigations && showInvestigationResults && (
+                <div className="flex justify-start mt-2">
+                  <div className="ml-11 max-w-[80%] bg-gray-50 rounded-xl border-l-4 border-purple-500 p-4">
+                    <p className="text-sm text-gray-500 italic">No investigation results data available for this case.</p>
+                  </div>
+                </div>
+              )}
+            </React.Fragment>
           ))}
           {isLoading && (
             <div className="flex justify-start">
