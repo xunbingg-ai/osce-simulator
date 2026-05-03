@@ -11,6 +11,13 @@ export interface HPI {
   relieving_factors: string[];
 }
 
+export interface SPDialogue {
+  trigger: string;
+  trigger_zh: string;
+  response: string;
+  response_zh: string;
+}
+
 export interface Symptoms {
   respiratory?: Record<string, unknown>;
   cardiovascular?: Record<string, unknown>;
@@ -55,6 +62,7 @@ export interface PatientInfo {
 }
 
 export interface VivaQuestion {
+  part?: 'dx' | 'pe' | 'investigations' | 'management' | 'other';
   question: string;
   answer: string | string[] | Record<string, unknown>;
 }
@@ -70,6 +78,10 @@ export interface CaseData {
   patient: PatientInfo;
   questions: VivaQuestion[];
   marking_scheme: MarkingScheme;
+  vital_signs?: string;
+  sp_script?: SPDialogue[];
+  pe_findings?: string;
+  investigations?: string;
 }
 
 export interface MarkingCategory {
