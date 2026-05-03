@@ -12,7 +12,7 @@ interface VivaPhaseProps {
 }
 
 function stripPartTag(content: string): string {
-  return content.replace(/\n?\[PART: (?:pe|investigations)\]\n?/g, '').trim();
+  return content.replace(/\n?\[PART: [^\]]+\]\n?/g, '').trim();
 }
 
 export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }: VivaPhaseProps) {
@@ -215,9 +215,6 @@ export default function VivaPhase({ caseData, caseId, chatMessages, onComplete }
                         : 'bg-purple-50 text-gray-800 rounded-tl-sm border border-purple-200'
                     }`}
                   >
-                    <p className="text-sm font-semibold text-purple-600 mb-1">
-                      {msg.role === 'examiner' ? 'Examiner' : 'You'}
-                    </p>
                     <p className="text-base leading-relaxed whitespace-pre-wrap break-words">{stripPartTag(msg.content)}</p>
                   </div>
                 </div>

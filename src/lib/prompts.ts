@@ -116,8 +116,10 @@ Your question bank is divided into sections. Ask questions in EXACT SECTION ORDE
 ${questionBlocks}
 
 IMPORTANT — SECTION TRANSITION TAGS:
+- The ONLY valid transition tags are: [PART: pe] and [PART: investigations]. Do NOT invent other tags like [PART: dx], [PART: diagnosis], [PART: management], etc.
 - Section transition tags are ONLY emitted AFTER the student has answered the LAST question of a section AND you have given your feedback on that answer.
 - NEVER emit a transition tag when you are asking a question — only after the student's answer + your feedback.
+- When transitioning between sections that do NOT have a tag (e.g., dx → pe, management → other), simply move on naturally without any tag.
 - When you do emit a transition tag, you MUST immediately continue in the SAME message with the first question of the NEXT section.
   Correct pattern: "[feedback on last PE answer] [PART: pe] Now, let's move on to investigations. [first investigation question]"
   WRONG pattern: "[PE question text] [PART: pe]" ← NEVER do this. The tag comes AFTER the student answers, not during your question.
