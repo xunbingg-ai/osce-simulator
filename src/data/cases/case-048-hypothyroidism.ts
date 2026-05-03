@@ -6,7 +6,7 @@ const case048Hypothyroidism: CaseData = {
   case_name: 'Menstrual Irregularity',
   type: 'regular',
   is_general_case: false,
-  vital_signs: 'T 36.8°C (98.2°F), P 62 bpm, R 14/min, BP 108/68 mmHg, BMI 26.5 kg/m²',
+  vital_signs: 'T 36.8°C, P 62 bpm, R 14/min, BP 108/68 mmHg, SpO₂ 98% on room air',
   patient: {
     age: 38,
     gender: 'F',
@@ -120,16 +120,22 @@ const case048Hypothyroidism: CaseData = {
       response_zh: '你这么一说，我最近确实有点便秘。不算严重，也不疼，只是不如以前规律了。我也没太在意。',
     },
     {
-      trigger: 'Do you have any headaches or changes in your vision?',
-      trigger_zh: '你有头痛或视力变化吗？',
-      response: "No, nothing like that. My vision has been fine, and I don't get headaches more than just the occasional normal one.",
-      response_zh: '没有，没有这些情况。视力一直很好，头痛也没有比以前多，偶尔会痛一下而已。',
+      trigger: 'Do you have any other medical conditions? / Any past medical history?',
+      trigger_zh: '你还有其他病史吗？/ 以前有过什么病吗？',
+      response: "No, I've always been healthy. No surgeries besides my tubal ligation. I don't have any chronic conditions or anything like that. Just the usual checkups.",
+      response_zh: '没有，我一直挺健康的。除了输卵管结扎没做过其他手术。没什么慢性病。每年就是做做常规检查。',
     },
     {
-      trigger: 'What are you most worried about? / What do you think might be going on?',
-      trigger_zh: '你最担心什么？/ 你觉得可能是什么问题？',
-      response: "I've been looking things up online... and I'm worried this could be early menopause. I'm only 38, that seems way too young. Or I've read about... pituitary tumors that can cause these kinds of symptoms. I just want to know what's going on. Even though I'm done having children, the idea that something is wrong with my body... it's unsettling.",
-      response_zh: '我在网上查了一下……我担心会不会是早更。我才38岁，应该还不到时候吧。我还看到说……脑垂体瘤也会引起这些症状。我就是想知道到底是怎么回事。虽然我不打算再生孩子了，但知道自己身体出了问题……挺让人不安的。',
+      trigger: 'Are you taking any medications? / Any allergies?',
+      trigger_zh: '你在吃什么药吗？/ 有过敏史吗？',
+      response: "Just a daily multivitamin. No allergies that I know of.",
+      response_zh: '就每天吃一片复合维生素。没有过敏史。',
+    },
+    {
+      trigger: 'Do you smoke or drink alcohol? / Any social habits?',
+      trigger_zh: '你抽烟喝酒吗？/ 有什么生活习惯？',
+      response: "No, I don't smoke. I might have a glass of wine with dinner occasionally, but not very often. I try to stay healthy.",
+      response_zh: '不抽烟。偶尔吃饭的时候喝杯红酒，但不常喝。我平时还是比较注意健康的。',
     },
     {
       trigger: 'Does anyone in your family have thyroid problems or autoimmune conditions?',
@@ -138,66 +144,67 @@ const case048Hypothyroidism: CaseData = {
       response_zh: '有的，我妈妈有甲状腺功能减退，吃了好多年的药了。我以前没把这事和我现在的症状联系起来，但也许是有关系的。',
     },
     {
-      trigger: 'Are you taking any medications? / Any allergies? / Any other medical conditions?',
-      trigger_zh: '你在吃什么药吗？/ 有过敏史吗？/ 还有其他病史吗？',
-      response: "Just a daily multivitamin. No allergies that I know of. And I don't have any other medical conditions — I've always been healthy.",
-      response_zh: '就每天吃一片复合维生素。没有过敏史。我也没什么其他病，身体一直挺好的。',
+      trigger: 'What are you most worried about? / What do you think might be going on?',
+      trigger_zh: '你最担心什么？/ 你觉得可能是什么问题？',
+      response: "I've been looking things up online... and I'm worried this could be early menopause. I'm only 38, that seems way too young. Or I've read about... pituitary tumors that can cause these kinds of symptoms. I just want to know what's going on. Even though I'm done having children, the idea that something is wrong with my body... it's unsettling.",
+      response_zh: '我在网上查了一下……我担心会不会是早更。我才38岁，应该还不到时候吧。我还看到说……脑垂体瘤也会引起这些症状。我就是想知道到底是怎么回事。虽然我不打算再生孩子了，但知道自己身体出了问题……挺让人不安的。',
     },
     {
-      trigger: 'Is there anything else you want to ask me? / Any other concerns?',
-      trigger_zh: '你还有什么想问我吗？/ 还有其他担心的事吗？',
-      response: "Just... what do you think this could be? I'm ready for whatever tests you need. I just want to know what's happening so I can get treatment and feel like myself again.",
-      response_zh: '我就是想知道……你觉得我可能是什么问题？需要做什么检查我都愿意做。我只想知道到底怎么回事，赶紧治好，让我恢复以前的状态。',
+      trigger: 'What are you hoping we can do today? / Is there anything else you want to ask me?',
+      trigger_zh: '你今天希望我们做什么？/ 你还有什么想问我吗？',
+      response: "I'm ready for whatever tests you need. I just want to know what's happening so I can get treatment and feel like myself again. The fatigue and weight gain are really affecting my daily life.",
+      response_zh: '需要做什么检查我都愿意做。我只想知道到底怎么回事，赶紧治好，让我恢复以前的状态。这种疲劳和体重增加真的影响到我的日常生活了。',
     },
   ],
   questions: [
     {
       part: 'dx',
-      question: 'What is the most likely diagnosis and underlying etiology?',
-      answer: 'Oligomenorrhea and galactorrhea due to hypothyroidism. The most likely etiology is primary hypothyroidism, most often caused by autoimmune (Hashimoto) thyroiditis. Hypothyroidism leads to elevated TRH, which stimulates prolactin secretion, causing galactorrhea and menstrual irregularities.',
+      question: 'What is the most likely diagnosis for this patient? Explain your reasoning including the relevant clinical features.',
+      answer: 'Hypothyroidism (likely autoimmune/Hashimoto thyroiditis) presenting with secondary amenorrhea and galactorrhea. The patient is a 38-year-old woman with progressive fatigue, weight gain, cold intolerance, constipation, hair thinning, dry coarse skin, and secondary amenorrhea for 3 months with galactorrhea. She has a positive family history of maternal hypothyroidism. The constellation of hypothyroid symptoms combined with menstrual irregularity and galactorrhea is classic for hypothyroidism — elevated TRH from primary hypothyroidism stimulates prolactin secretion, causing galactorrhea and disrupting the hypothalamic-pituitary-ovarian axis.',
     },
     {
       part: 'dx',
-      question: 'What is the diagnostic approach to secondary amenorrhea?',
-      answer: 'First, exclude pregnancy (serum beta-hCG). Then check TSH (to rule out thyroid disease) and prolactin level. Based on results, evaluate further: elevated FSH suggests ovarian failure; elevated prolactin > 200 suggests pituitary adenoma (MRI indicated); low/normal FSH with normal prolactin and TSH suggests hypothalamic hypogonadism or PCOS.',
+      question: 'What is the diagnostic approach to secondary amenorrhea? What diagnoses should be on your differential?',
+      answer: 'First, exclude pregnancy (serum beta-hCG). Then check TSH (to rule out thyroid dysfunction) and prolactin level. Based on results: elevated FSH suggests ovarian failure/premature menopause; elevated prolactin >200 suggests prolactinoma (MRI indicated); low/normal FSH with normal prolactin and TSH suggests hypothalamic hypogonadism (functional hypothalamic amenorrhea from stress, weight loss, excessive exercise) or PCOS. Additional differentials: (1) Asherman syndrome (intrauterine adhesions — history of D&C), (2) Sheehan syndrome (postpartum pituitary necrosis — history of postpartum hemorrhage), (3) drug-induced (antipsychotics, metoclopramide causing hyperprolactinemia).',
     },
     {
       part: 'pe',
-      question: 'What physical examination findings would you expect in this patient, and what specific signs would support the diagnosis?',
-      answer: 'Vital signs: mild bradycardia (heart rate 58-64 bpm) or low-normal heart rate due to reduced metabolic rate, blood pressure normal to slightly low. General: mild weight gain (BMI 26.5), periorbital puffiness, movements and speech may be slightly slowed. Neck: thyroid gland — diffusely and symmetrically enlarged (goiter), firm but non-tender to palpation, no discrete nodules — consistent with autoimmune thyroiditis (Hashimoto). Skin: dry, coarse, cool to touch. Hair: thin, brittle, with possible thinning of the lateral third of the eyebrows (Queen Anne\'s sign). Breasts: symmetric, no masses; expressible galactorrhea — small amount of whitish discharge from both nipples with gentle pressure. Neurologic: delayed relaxation phase of deep tendon reflexes (hung-up reflexes) — most prominent at the Achilles tendon; this is a classic and nearly pathognomonic sign of hypothyroidism. No exophthalmos or pretibial myxedema (these are features of Graves disease, not Hashimoto).',
+      question: 'How would you examine this patient? What specific physical findings are you looking for to confirm your diagnosis and rule out alternative causes?',
+      answer: 'General: vital signs (bradycardia, low-normal BP), BMI (weight gain), periorbital puffiness, slowed movements and speech. Neck: thyroid palpation — size (diffusely enlarged/goiter vs normal), consistency (firm in Hashimoto), tenderness, nodules. Skin: dry, coarse, cool to touch — check for pretibial myxedema (Graves, not Hashimoto). Hair: thin, brittle, loss of lateral eyebrow hair (Queen Anne\'s sign). Breasts: check for galactorrhea — gentle compression for expressible discharge; breast exam to rule out masses. Neurologic: deep tendon reflexes — delayed relaxation phase (hung-up reflexes) most prominent at Achilles tendon; this is a classic and nearly pathognomonic sign of hypothyroidism. Fundoscopy: visual fields — rule out bitemporal hemianopia (pituitary mass). Key negatives: no exophthalmos or lid lag (Graves disease), no acne/hirsutism (PCOS), no visual field defects (pituitary tumor).',
     },
     {
       part: 'investigations',
-      question: 'What laboratory tests would confirm the diagnosis?',
-      answer: 'Elevated TSH with low free T4 confirms primary hypothyroidism. Prolactin level may be mildly elevated due to TRH stimulation. Anti-thyroid peroxidase (anti-TPO) antibodies are typically positive in Hashimoto thyroiditis. If prolactin is markedly elevated (> 200), pituitary MRI is indicated.',
+      question: 'What investigations would you order to confirm the diagnosis and identify the underlying etiology? Explain your rationale.',
+      answer: 'Initial/Core: (1) TSH — markedly elevated (>20 mIU/L; normal 0.5-4.5) — most sensitive screening test for primary hypothyroidism. (2) Free T4 — low (<0.8 ng/dL) — confirms inadequate thyroid hormone production. (3) Beta-hCG — negative — excludes pregnancy (first step in secondary amenorrhea workup). (4) Prolactin — mildly elevated (~60 ng/mL; normal <25) — TRH stimulates lactotrophs; helps distinguish from prolactinoma. (5) FSH — normal (~5-10 IU/L) — rules out premature ovarian failure. Confirmatory: (6) Anti-thyroid peroxidase (anti-TPO) antibodies — positive (>500 IU/mL) — confirms autoimmune Hashimoto thyroiditis as the underlying etiology. (7) Lipid panel — elevated total cholesterol and LDL — hypothyroidism decreases hepatic LDL receptor expression. (8) CBC — may show mild normocytic anemia. Further work-up: (9) Pituitary MRI — only if prolactin >200 ng/mL, visual field defects, or concerning headaches (not indicated here). (10) Thyroid ultrasound — only if nodules palpable on exam.',
     },
     {
       part: 'investigations',
-      question: 'How would you interpret the complete laboratory results, and what additional tests are indicated?',
-      answer: 'TSH: markedly elevated at approximately 25 mIU/L (normal 0.5-4.5) — the most sensitive test for primary hypothyroidism. Free T4: low at approximately 0.4 ng/dL (normal 0.8-1.8) — confirms inadequate thyroid hormone production. Anti-TPO antibodies: positive (e.g., >500 IU/mL) — confirms autoimmune Hashimoto thyroiditis as the underlying etiology. Prolactin: mildly elevated at approximately 60 ng/mL (normal <25 ng/mL) — this is secondary to elevated TRH, which stimulates both TSH and prolactin secretion from pituitary lactotrophs. Prolactin >200 would suggest a prolactinoma requiring MRI. FSH: normal — helps rule out premature ovarian failure. Beta-hCG: negative — excludes pregnancy. Lipid panel: total cholesterol and LDL elevated — hypothyroidism decreases hepatic LDL receptor expression, causing secondary hyperlipidemia. CBC: may show mild normocytic anemia (common in hypothyroidism). Thyroid ultrasound is indicated only if nodules are palpable on exam.',
+      question: 'How would you interpret the expected laboratory results? What is the pathophysiological link between hypothyroidism, galactorrhea, and amenorrhea?',
+      answer: 'Primary hypothyroidism causes decreased T4 feedback to the hypothalamus, leading to increased TRH secretion. TRH is a prolactin-releasing factor — elevated TRH stimulates pituitary lactotrophs, causing hyperprolactinemia. Prolactin inhibits hypothalamic GnRH secretion, which suppresses the pulsatile release of FSH and LH from the pituitary. This disrupts ovarian follicular development and ovulation, causing anovulation and secondary amenorrhea. Lab interpretation: TSH markedly elevated (confirming primary hypothyroidism), free T4 low, prolactin mildly elevated (not >200 which would suggest prolactinoma), FSH normal (excludes ovarian failure), anti-TPO positive (confirming autoimmune etiology).',
     },
     {
       part: 'management',
-      question: 'What is the treatment for hypothyroidism and what is the goal of therapy?',
-      answer: 'Synthetic levothyroxine (T4) replacement is the treatment of choice — once-daily dosing at 1.6 mcg/kg (typically 100-150 mcg daily). In older patients or those with cardiovascular disease, start low (25-50 mcg/day) and increase gradually every 4-6 weeks. The goal is normalized TSH (ideally in the lower half of the reference range) and relief of symptoms.',
+      question: 'How would you manage this patient? Outline your treatment plan and expected outcomes.',
+      answer: 'Synthetic levothyroxine (T4) replacement is the treatment of choice. Starting dose: 1.6 mcg/kg/day (approximately 100-125 mcg daily for a 70 kg patient). In young, otherwise healthy patients, starting near the full replacement dose is appropriate. If the patient had cardiovascular disease or was elderly, start low (25-50 mcg/day) and titrate gradually every 4-6 weeks. Goal: normalize TSH to the lower half of the reference range (0.5-2.5 mIU/L). Expected outcomes: within 2-4 weeks — improved energy and sense of well-being; 4-8 weeks — TSH normalization allows dose titration; 2-4 months — menstrual cycles typically resume and galactorrhea resolves as prolactin normalizes. Weight loss may occur as metabolic rate normalizes. Lifelong therapy is needed.',
     },
     {
       part: 'other',
-      question: 'How does hypothyroidism cause galactorrhea and menstrual irregularities? What is the differential diagnosis for galactorrhea?',
-      answer: 'In primary hypothyroidism, the hypothalamus increases thyrotropin-releasing hormone (TRH) to stimulate the pituitary. TRH also stimulates prolactin secretion from lactotroph cells. Hyperprolactinemia then inhibits hypothalamic GnRH secretion, leading to menstrual irregularities and galactorrhea. The differential diagnosis for galactorrhea includes: (1) Hypothyroidism (elevated TRH stimulates prolactin — as in this case), (2) Prolactinoma (prolactin >200, MRI indicated), (3) Medications (antipsychotics, metoclopramide, SSRIs, verapamil), (4) Chest wall stimulation or trauma, (5) Chronic renal failure, (6) Idiopathic. The presence of fatigue, weight gain, cold intolerance, hair thinning, and constipation in this patient points toward hypothyroidism rather than a primary pituitary cause.',
+      question: 'What is the differential diagnosis for galactorrhea? How would you distinguish hypothyroidism-induced galactorrhea from a prolactinoma?',
+      answer: 'Differential: (1) Hypothyroidism (elevated TRH stimulates prolactin — mild prolactin elevation, typically <100 ng/mL). (2) Prolactinoma (prolactin >200 ng/mL, MRI shows pituitary adenoma, may present with visual field defects or headaches). (3) Medications — antipsychotics (dopamine D2 antagonists), metoclopramide, SSRIs, verapamil. (4) Chest wall stimulation or trauma. (5) Chronic renal failure (decreased prolactin clearance). (6) Idiopathic. Key distinguishing features: hypothyroidism-induced galactorrhea is accompanied by classic hypothyroid symptoms (fatigue, cold intolerance, weight gain, constipation, dry skin), TSH is elevated, prolactin is only mildly elevated, and anti-TPO antibodies are positive. In contrast, prolactinoma presents with prolactin >200 ng/mL, normal thyroid function, and may show pituitary mass on MRI. Treatment of hypothyroidism (levothyroxine) will resolve the galactorrhea — no need for dopamine agonists.',
+    },
+    {
+      part: 'other',
+      question: 'What complications should be monitored in untreated hypothyroidism, and what is the importance of medication adherence?',
+      answer: 'Untreated hypothyroidism can lead to: progressive weight gain, worsening fatigue, depression, cognitive impairment ("brain fog"), carpal tunnel syndrome, hoarseness, obstructive sleep apnea, and infertility. In severe cases: myxedema coma — a life-threatening emergency with hypothermia, bradycardia, hypotension, altered mental status, and hypoventilation — often precipitated by infection, cold exposure, or medication non-adherence. Medication adherence is critical because: (1) levothyroxine has a narrow therapeutic index — under-replacement leaves symptoms, over-replacement causes iatrogenic hyperthyroidism (palpitations, anxiety, osteoporosis, atrial fibrillation risk). (2) Take on empty stomach, 30-60 minutes before breakfast, and at least 4 hours apart from calcium, iron, or antacids which impair absorption. (3) Routine monitoring: check TSH 6-8 weeks after any dose change, then annually once stable.',
     },
   ],
-  pe_findings: `Vital Signs: T 36.8°C (98.2°F), P 62 bpm, R 14/min, BP 108/68 mmHg, BMI 26.5 kg/m²
+  pe_findings: `**Vital Signs:** T 36.8°C, P 62 bpm, R 14/min, BP 108/68 mmHg, SpO₂ 98% on room air, BMI 26.5 kg/m²
 
 **General:** Mildly overweight female in no acute distress. Mild periorbital puffiness. Movements appear slightly slowed. Speech is normal. Anicteric.
 
+**HEENT:** Pupils equal and reactive to light. No visual field defects on confrontation testing. Extraocular movements intact. No conjunctival injection. Mucous membranes moist. Fundoscopy: Optic discs sharp, no papilledema.
+
 **Neck:** Trachea midline. Thyroid gland is diffusely and symmetrically enlarged (estimated 30-35 g; normal ~20 g). Firm but non-tender to palpation. No discrete nodules palpable. No cervical lymphadenopathy. No thyroid bruits. No JVP elevation.
-
-**Skin:** Dry and coarse texture. Cool to touch. No rashes, lesions, or pretibial myxedema.
-
-**Hair:** Thin and brittle texture. Sparse in the lateral third of both eyebrows (Queen Anne's sign). No alopecia areata.
-
-**Breasts:** Symmetric, no palpable masses. Gentle compression elicits small amount of whitish discharge from both nipples bilaterally.
 
 **Cardiovascular:** Regular rate and rhythm at 62 bpm. No murmurs, rubs, or gallops. Peripheral pulses 2+ and symmetric. No carotid bruits.
 
@@ -205,24 +212,30 @@ const case048Hypothyroidism: CaseData = {
 
 **Abdomen:** Soft, non-tender, non-distended. Normal bowel sounds. No masses, organomegaly, or ascites.
 
-**Neurologic:** Cranial nerves II-XII grossly intact. Muscle strength 5/5 throughout all extremities. Sensation intact to light touch. Deep tendon reflexes: 2+ symmetrically with notably delayed relaxation phase (hung-up reflexes) — most prominent at the Achilles tendons. This is a classic sign of hypothyroidism. Gait normal. Coordination intact.
+**Skin:** Dry and coarse texture. Cool to touch. No rashes, lesions, or pretibial myxedema.
 
-**Extremities:** No clubbing, cyanosis, or edema.
+**Hair:** Thin and brittle texture. Sparse in the lateral third of both eyebrows (Queen Anne's sign). No alopecia areata.
+
+**Breasts:** Symmetric, no palpable masses. Gentle compression elicits small amount of whitish discharge from both nipples bilaterally.
+
+**Extremities:** No clubbing, cyanosis, or edema. No joint swelling or tenderness.
+
+**Neurologic:** Cranial nerves II-XII grossly intact. Muscle strength 5/5 throughout all extremities. Sensation intact to light touch. Deep tendon reflexes: 2+ symmetrically with notably delayed relaxation phase (hung-up reflexes) — most prominent at the Achilles tendons. This is a classic sign of hypothyroidism. Gait normal. Coordination intact. Negative Romberg.
 
 **Key findings:** Bradycardia (62 bpm), diffusely enlarged non-tender thyroid gland (consistent with Hashimoto thyroiditis), dry coarse skin, thin brittle hair with loss of lateral eyebrow hair, expressible galactorrhea bilaterally, hung-up deep tendon reflexes (delayed relaxation phase — pathognomonic for hypothyroidism).`,
-  investigations: `Initial Testing (Core):
-• TSH — markedly elevated at 25 mIU/L (normal 0.5-4.5 mIU/L) — confirms primary hypothyroidism
+  investigations: `**Initial / Core Tests:**
+• TSH — markedly elevated at 25 mIU/L (normal 0.5-4.5 mIU/L) — most sensitive screening test for primary hypothyroidism
 • Free T4 — low at 0.4 ng/dL (normal 0.8-1.8 ng/dL) — confirms inadequate thyroid hormone production
-• Beta-hCG — negative — excludes pregnancy as cause of amenorrhea
-• Prolactin — mildly elevated at ~60 ng/mL (normal <25 ng/mL) — elevated TRH stimulates lactotrophs
+• Beta-hCG — negative — excludes pregnancy as cause of amenorrhea (first step in secondary amenorrhea workup)
+• Prolactin — mildly elevated at ~60 ng/mL (normal <25 ng/mL) — elevated TRH stimulates lactotrophs; mild elevation distinguishes from prolactinoma
 • FSH — normal (5-10 IU/L) — rules out premature ovarian failure / menopause
 
-Confirmatory Testing:
+**Additional / Confirmatory Tests:**
 • Anti-thyroid peroxidase (Anti-TPO) antibodies — positive (>500 IU/mL) — confirms autoimmune Hashimoto thyroiditis as the underlying etiology
 • Lipid panel — total cholesterol elevated at 6.8 mmol/L, LDL 4.6 mmol/L (hypothyroidism decreases hepatic LDL receptor expression, causing secondary hyperlipidemia)
 • CBC — mild normocytic anemia (Hb 11.2 g/dL, MCV 88 fL) — normocytic anemia is common in hypothyroidism due to decreased erythropoietin production and metabolic demand
 
-Further Work-up (if indicated):
+**Further Work-up (if indicated):**
 • Pituitary MRI — indicated only if prolactin is markedly elevated (>200 ng/mL) or if the patient has visual field defects, headaches, or other signs of mass effect (not present here)
 • Thyroid ultrasound — indicated only if nodules are palpable on physical exam (no nodules felt in this patient)
 • Repeat thyroid function tests in 6-8 weeks after starting levothyroxine to assess response and titrate dose`,
